@@ -1,0 +1,50 @@
+
+    tasarım için 2 adet Plain Text (edit text bölümünde - kullanıcı içlerine değer girebilir).
+    1 adet textView (kullanıcı içine değer giremez sadece yazılar görünür).
+    4 adet buton ( + - * / ).
+
+    id , hint (ipucu) ve içlerini doldurma (text)
+    Plain Text ==  id --- number1Text ve number2Text  ,   hint --- enter number 1-2  ve text --- number 1 ve number2.
+    textView ==  id ---- ResultText , hint --- boş ve text --- result: 0.
+    button ==  text --- + - * /
+
+    infer constraints...
+    tasarımın uygulamada konumlarının ayarlanması için yapıyoruz. bir kere basmamız yeterli.
+    düzgün şeilde çalışmazsa layout altında linear laout var. oradan butonları ayarladık düzgünce.
+
+    butona basınca ne olacak??? onclick metodu altında butonlara sonradan ulaşmak üzere ,
+    toplama - cikarma - carpma- bolme yazıyorz. kodlarken bu isimleri kullanicaz.
+
+
+    ****  her şeyden çönce tanımladığımız onclick metodlarını koda yazıcaz. (toplama-cikarma-carpma-bolme).
+
+    public void toplama(View view) {} - bir görünüm tarafından çağırılacağını belirtmek için içerisine (View view) tanımlıoruz.
+
+    kullanıcıdan sayıları alabilmek için Edit Text ve sonucu gösterebilmek için Result Text e ihtiyacımız var. bunları tanımlıyoruz.
+
+    EditText number1Text = findViewById(R.id.number1Text);
+    EditText number2Text = findViewById(R.id.number1Text);
+    TextView resultText = findViewById(R.id.ResultText);
+
+    EditText number1Text;
+    EditText number2Text;   fakat bunları onCreate dışında tanımlıyorum ki diğer metodlardan bunlara ulaşabilelim...
+    TextView resultText;
+
+    number1Text.getText().toString()  ---  number1Text in içine  yazılan şeyi alıyoruz ve stringe dönüştürüyouz. kullanıcının yazdığı şeyi metin olarak alıyoruz.
+    fakat bunu onCreate altında yapmanın bir mantğı yok. bnu kullanıcı sayıları girip butonlara (+ - * /) bastığı anda yapmamız lazım. o yuzden bunu  + - * / metodları altında yapıcaz.
+
+    number1Text.getText() ile edit text e yazılanı kullanıcıdan alırız fakat gelen input editable olduğu için (int string değil) bunu kullanamayız. o yüzden
+    number1Text.getText().toString() yaparak gelen ınputu strınge donustuyruyoruz.
+    fakat ben Strıng lerde işlem yapmak istemiyorum. bunu rakama (int double) çevirmek istiyorum.
+
+    bunu nteger (int) e çevirmek için  Integer.parseInt() --- parantez içine sizden String istiyor. ve verdiğiniz Stringi tam sayıya çeviriyor.
+
+
+    int number1 = Integer.parseInt(number1Text.getText().toString());   //kulanıcıdan alınan inputu strınge ve ardından int e dönüştürdük.
+    int number2 = Integer.parseInt(number2Text.getText().toString());   //kulanıcıdan alınan inputu strınge ve ardından int e dönüştürdük.
+    int result = number1 + number2;
+
+    resultText.setText("Result: " + result);  --- resultText i yazdırmak için setText() ile içerisinde result u atıyoruz fakat result int tipinde.
+    bize string lazım. bunun içinde  - "result": + result -  yaparak sornu çözüyoruz.
+
+
